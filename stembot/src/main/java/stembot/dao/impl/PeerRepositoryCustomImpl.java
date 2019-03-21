@@ -24,7 +24,7 @@ public class PeerRepositoryCustomImpl implements PeerRepositoryCustom {
         
         Peer peer = this.getPeer(agtuuid);
         
-        if(peer.destroyTime - currentTime < 10) {
+        if(peer.destroyTime - currentTime < 10 && !peer.destroyTime.equals(new Long(0))) {
             Query query = new Query(Criteria.where("agtuuid").is(agtuuid));
             
             Update update = new Update().set("destroyTime", currentTime + 60);
@@ -38,11 +38,11 @@ public class PeerRepositoryCustomImpl implements PeerRepositoryCustom {
         Instant instant = Instant.now();
         Long currentTime = new Long(instant.getEpochSecond());
         
-        Query query = new Query(Criteria.where("destroyTime").lt(currentTime));
+        Query query = new Query(Criteria.where("destroyTime").lt(currentTime).and("destroyTime").ne(new Long(0)));
         
         this.mongoTemplate.remove(query, Peer.class);
     }
-
+    
     @Override
     public Peer getPeer(String agtuuid) {
         Peer peer;

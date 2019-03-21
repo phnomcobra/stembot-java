@@ -1,6 +1,7 @@
 package stembot;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class ScheduledTasks {
     public void ageAndAdvertise() {
         this.routeRepository.ageRoutes(15, 3600);
         
-        String agtuuid = this.keyValueRepository.getKeyValue("agtuuid").value;
+        String agtuuid = this.keyValueRepository.getKeyValue("agtuuid", UUID.randomUUID().toString()).value;
         
         JSONObject advertisement = new JSONObject();
         

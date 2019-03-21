@@ -10,7 +10,7 @@ public class Peer {
     
     public String agtuuid;
     public Long destroyTime;
-
+    
     public Peer(String agtuuid) {
         this.agtuuid = agtuuid;
         
